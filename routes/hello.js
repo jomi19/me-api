@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-router.get("/", function(req, res, next) {
+router.get("/", function(req, res) {
     const data = {
         data: {
-            msg: "Joakim mikaelsson"
+            msg: "Joakim Mikaelsson"
         }
-    }
+    };
 
-    res.json(data);
-})
+    res.status(201).json(data);
+});
 
 module.exports = router;
