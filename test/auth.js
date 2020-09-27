@@ -26,7 +26,7 @@ describe("Test user functions", () => {
                         password: test.password
                     })
                     .end((err, res) => {
-                        if (test.status != undefined) {
+                        if (test.status !== undefined) {
                             res.should.have.status(test.status);
                             res.body.errors.title.should.equal(test.message);
                         } else {

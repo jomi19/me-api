@@ -54,7 +54,7 @@ const auth = {
                 if (err) {
                     return errors.error(res, 500, "/login", "Database error", err.message);
                 }
-                if (row == undefined) {
+                if (row === undefined) {
                     return errors.error(res, 401, "/login", "User not found",
                         "User with provided email not found");
                 }

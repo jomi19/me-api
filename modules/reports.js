@@ -15,7 +15,7 @@ const reports = {
                 if (err) {
                     return errors.error(res, 500, "/reports", "Database error", err.message);
                 }
-                if (row == undefined) {
+                if (row === undefined) {
                     return errors.error(res, 404, "/reports",
                         "Kmom not found", "That kmomnumber couldent be found");
                 }

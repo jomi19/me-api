@@ -24,7 +24,7 @@ describe("Test report routes", () => {
                     .get(`/reports/week/${test.kmom || ""}`)
                     .end((err, res) => {
                         res.should.have.status(test.status);
-                        if (res.body.errors != undefined) {
+                        if (res.body.errors !== undefined) {
                             res.body.errors.title.should.equal(test.error);
                         } else {
                             res.body.data.kmom.should.equal(test.kmom);

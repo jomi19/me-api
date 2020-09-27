@@ -7,6 +7,7 @@
     "pretest": "bash db/reset_test_db.bash",
     "start": "node app.js",
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
+    "posttest": "npm run eslint",
     "production": "NODE_ENV='secret' node app.js",
     "eslint": "eslint ."
   },

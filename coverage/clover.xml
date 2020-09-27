@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1601243160431" clover="3.2.0">
-  <project timestamp="1601243160431" name="All files">
-    <metrics statements="143" coveredstatements="135" conditionals="45" coveredconditionals="37" methods="28" coveredmethods="28" elements="216" coveredelements="200" complexity="0" loc="143" ncloc="143" packages="4" files="9" classes="9"/>
+<coverage generated="1601245338575" clover="3.2.0">
+  <project timestamp="1601245338575" name="All files">
+    <metrics statements="143" coveredstatements="133" conditionals="45" coveredconditionals="37" methods="28" coveredmethods="27" elements="216" coveredelements="197" complexity="0" loc="143" ncloc="143" packages="4" files="9" classes="9"/>
     <package name="api">
       <metrics statements="30" coveredstatements="29" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
       <file name="app.js" path="C:\cygwin\home\zlata\dbwebb-kurser\api\app.js">
@@ -20,9 +20,9 @@
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
-        <line num="18" count="18" type="stmt"/>
-        <line num="19" count="18" type="stmt"/>
-        <line num="20" count="18" type="stmt"/>
+        <line num="18" count="17" type="stmt"/>
+        <line num="19" count="17" type="stmt"/>
+        <line num="20" count="17" type="stmt"/>
         <line num="23" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="25" count="0" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
@@ -137,14 +137,14 @@
       </file>
     </package>
     <package name="api.routes">
-      <metrics statements="33" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+      <metrics statements="33" coveredstatements="31" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="8"/>
       <file name="hello.js" path="C:\cygwin\home\zlata\dbwebb-kurser\api\routes\hello.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
       </file>
       <file name="reguser.js" path="C:\cygwin\home\zlata\dbwebb-kurser\api\routes\reguser.js">
