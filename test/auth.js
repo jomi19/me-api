@@ -12,7 +12,7 @@ describe("Test user functions", () => {
     var users = [
         {email: "", password: "", status: 401, message: "Email or password missing"},
         {email: "mailen@not.exists", password: "whoami", status: 401, message: "User not found"},
-        {email: "chai@test.nu", password: "testar", status: undefined,  message: undefined},
+        {email: "chai@test.nu", password: "testar", status: undefined,  message: "User logged in"},
         {email: "chai@test.nu", password: "wrongpass", status: 401, message: "Wrong password"}
     ];
 
