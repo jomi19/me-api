@@ -11,19 +11,6 @@ chai.should();
 chai.use(chaiHttp);
 
 describe("Test user functions", () => {
-    before(() => {
-        return new Promise((resolve) => {
-            db.run(`INSERT INTO users (email, pass) VALUES("chai@test.nu",
-                "$2y$10$1UfzQK9VFm8mrZBNc1CNNexGwfOK1YQLZYUEMKAbrNHBZEA2R7Ay2");`, (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
-            resolve();
-        });
-    });
-
-
     var users = [
         {email: "", password: "", status: 401, message: "Email or password missing"},
         {email: "mailen@not.exists", password: "whoami", status: 401, message: "User not found"},
@@ -32,6 +19,17 @@ describe("Test user functions", () => {
     ];
 
     users.forEach((test) => {
+        before(() => {
+            return new Promise((resolve) => {
+                db.run(`INSERT INTO users (email, pass) VALUES("chai@test.nu",
+                    "$2y$10$1UfzQK9VFm8mrZBNc1CNNexGwfOK1YQLZYUEMKAbrNHBZEA2R7Ay2");`, (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+                resolve();
+            });
+        });
         describe(`POST /login`, () => {
             it(`Loging in with ${test.message}`, (done) => {
                 chai.request(server)
