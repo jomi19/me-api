@@ -22,7 +22,7 @@ const auth = {
             if (err) {
                 return errors.error(res, 500, "/rgister", "Bcrypt error");
             }
-            db.run("INSERT INTO users (email, password) values (?, ?)",
+            db.run("INSERT INTO users (email, pass) values (?, ?)",
                 email,
                 hash, (err) => {
                     if (err) {
@@ -61,7 +61,7 @@ const auth = {
 
                 const user = row;
 
-                bcrypt.compare(password, user.password, (err, result) => {
+                bcrypt.compare(password, user.pass, (err, result) => {
                     if (err) {
                         return errors.error(res, 500, "/login", "Bcrypt error");
                     }
