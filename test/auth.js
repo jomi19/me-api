@@ -1,4 +1,4 @@
-process.env.NODE_env = "test";
+process.env.NODE_ENV = 'test';
 process.env.JWT_SECRET = "test";
 
 
@@ -14,22 +14,11 @@ describe("Test user functions", () => {
     var users = [
         {email: "", password: "", status: 401, message: "Email or password missing"},
         {email: "mailen@not.exists", password: "whoami", status: 401, message: "User not found"},
-        // {email: "chai@test.nu", password: "testar", status: undefined,  message: "User logged in"},
-        // {email: "chai@test.nu", password: "wrongpass", status: 401, message: "Wrong password"}
+        {email: "chai@test.nu", password: "testar", status: undefined,  message: "User logged in"},
+        {email: "chai@test.nu", password: "wrongpass", status: 401, message: "Wrong password"}
     ];
 
     users.forEach((test) => {
-        before(() => {
-            return new Promise((resolve) => {
-                db.run(`INSERT INTO users (email, pass) VALUES("chai@test.nu",
-                    "$2y$10$1UfzQK9VFm8mrZBNc1CNNexGwfOK1YQLZYUEMKAbrNHBZEA2R7Ay2");`, (err) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-                resolve();
-            });
-        });
         describe(`POST /login`, () => {
             it(`Loging in with ${test.message}`, (done) => {
                 chai.request(server)
@@ -56,7 +45,7 @@ describe("Test user functions", () => {
     var newUsers = [
         {user: "my@new.us", password: "pas", status: 201, message: "User successfully registered."},
         {user: "", password: "", status: 401, message: "Email or password missing"},
-        // {user: "chai@test.nu", password: "testar", status: 500, message: "Database error"}
+        {user: "chai@test.nu", password: "testar", status: 500, message: "Database error"}
     ];
 
     newUsers.forEach((test) => {
