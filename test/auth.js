@@ -69,11 +69,12 @@ describe("Test user functions", () => {
                         password: test.password
                     })
                     .end((err, res) => {
+                        console.log(res.body.errors);
                         res.should.have.status(test.status);
                         if (test.status != 201) {
                             res.body.errors.title.should.equal(test.message);
                         } else {
-                            console.log(res.body.errors);
+                            
                             res.body.data.message.should.equal(test.message);
                         }
                         done();
