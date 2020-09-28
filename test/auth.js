@@ -30,6 +30,7 @@ describe("Test user functions", () => {
                             res.should.have.status(test.status);
                             res.body.errors.title.should.equal(test.message);
                         } else {
+                            console.log(res);
                             res.body.data.user.token.should.be.a("string");
                             res.body.data.message.should.equal(test.message);
                         }
