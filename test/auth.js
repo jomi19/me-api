@@ -33,6 +33,7 @@ describe("Test user functions", () => {
                             res.body.data.user.token.should.be.a("string");
                             res.body.data.message.should.equal(test.message);
                         }
+
                         done();
                     });
             });
