@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users (
-    email VARCHAR(255) COLLATE NOCASE NOT NULL ,
+    email VARCHAR(255) NOT NULL,
     pass VARCHAR(60) NOT NULL,
     UNIQUE(email)
 );
