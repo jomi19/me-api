@@ -49,7 +49,7 @@ const auth = {
             return errors.error(res, 401, "/login", "Email or password missing");
         }
 
-        db.get("SELECT * FROM users WHERE email = ?",
+        db.get("SELECT * FROM users WHERE email = ? COLLATE NOCASE",
             email, (err, row) => {
                 if (err) {
                     return errors.error(res, 500, "/login", "Database error", err.message);

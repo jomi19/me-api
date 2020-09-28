@@ -9,6 +9,37 @@ chai.should();
 chai.use(chaiHttp);
 
 describe("Test user functions", () => {
+    
+    var newUsers = [
+        {user: "my@new.us", password: "pas", status: 201, message: "User successfully registered."},
+        {user: "", password: "", status: 401, message: "Email or password missing"},
+        {user: "chai@test.nu", password: "testar", status: 500, message: "Database error"}
+    ];
+
+    newUsers.forEach((test) => {
+        describe(`POST /register`, () => {
+            it(`Register user with ${test.message}`, (done) => {
+                chai.request(server)
+                    .post("/register")
+                    .send({
+                        email: test.user,
+                        password: test.password
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(test.status);
+                        if (test.status != 201) {
+                            res.body.errors.title.should.equal(test.message);
+                        } else {
+                            res.body.data.message.should.equal(test.message);
+                        }
+                        done();
+                    });
+            });
+        });
+    });
+
+
+
     var users = [
         {email: "", password: "", status: 401, message: "Email or password missing"},
         {email: "mailen@not.exists", password: "whoami", status: 401, message: "User not found"},
@@ -41,31 +72,4 @@ describe("Test user functions", () => {
         });
     });
 
-    var newUsers = [
-        {user: "my@new.us", password: "pas", status: 201, message: "User successfully registered."},
-        {user: "", password: "", status: 401, message: "Email or password missing"},
-        {user: "chai@test.nu", password: "testar", status: 500, message: "Database error"}
-    ];
-
-    newUsers.forEach((test) => {
-        describe(`POST /register`, () => {
-            it(`Register user with ${test.message}`, (done) => {
-                chai.request(server)
-                    .post("/register")
-                    .send({
-                        email: test.user,
-                        password: test.password
-                    })
-                    .end((err, res) => {
-                        res.should.have.status(test.status);
-                        if (test.status != 201) {
-                            res.body.errors.title.should.equal(test.message);
-                        } else {
-                            res.body.data.message.should.equal(test.message);
-                        }
-                        done();
-                    });
-            });
-        });
-    });
 });
