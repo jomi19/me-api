@@ -1,7 +1,7 @@
 "use strict";
 
-const express = require("express");
-const app = express();
+const app = require("express")();
+const ioServer = require("http").createServer(app);
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -10,8 +10,7 @@ const users = require("./routes/users");
 const reports = require("./routes/reports");
 const port = 1337;
 const reguser = require("./routes/reguser");
-const { disconnect } = require("process");
-const ioServer = require("http").createServer();
+
 const io = require("socket.io")(ioServer);
 const userSocketIdMap = new Map();
 const usersOnline = [];
@@ -107,10 +106,9 @@ app.use((req, res, next) => {
     next(err);
 });
 
-const server = app.listen(port, () => {
+const server = ioServer.listen(port, () => {
     console.log(`Listening to ${port}`);
 });
 
-ioServer.listen(1338);
 
 module.exports = server;
