@@ -1,4 +1,4 @@
-process.env.NODE_env = "test";
+process.env.NODE_ENV = "test";
 
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -14,7 +14,6 @@ describe("Main page", () => {
             chai.request(server)
                 .get("/")
                 .end((err, res) => {
-                    console.log(res.body.data);
                     res.body.should.be.an("object");
                     res.body.data.should.be.an("object");
                     res.body.data.msg.should.equal("Joakim Mikaelsson");

@@ -10,6 +10,11 @@ const users = require("./routes/users");
 const reports = require("./routes/reports");
 const port = 1337;
 const reguser = require("./routes/reguser");
+const { disconnect } = require("process");
+const ioServer = require("http").createServer();
+const io = require("socket.io")(ioServer);
+const userSocketIdMap = new Map();
+const usersOnline = [];
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,6 +24,54 @@ app.use((req, res, next) => {
     console.log(req.path);
     next();
 });
+
+
+function addUserToOnline(socketId, username) {
+    if (!userSocketIdMap.has(username)) {
+        userSocketIdMap.set(socketId, username)
+        usersOnline.push(username);
+    } else {
+
+    }
+}
+
+function removeUser(socketId) {
+    console.log(socketId)
+    if (userSocketIdMap.has(socketId)) {
+        let user = userSocketIdMap.get(socketId)
+
+        usersOnline.splice(usersOnline.indexOf(user), 1);
+        userSocketIdMap.delete(socketId);
+        console.log("ahr" + user)
+
+        console.log(userSocketIdMap)
+    }
+
+    io.emit("userList", usersOnline)
+}
+
+
+io.on("connection", function(socket) {
+    console.info("User connected");
+
+    socket.on("username", function(username) {
+        addUserToOnline(socket.id, username)
+        io.emit("chat message", `${username} Dök upp i chatten!`)
+        io.emit("userList", usersOnline);
+        
+    })
+    socket.on("chat message", function(message) {
+        io.emit("chat message", message)
+    })
+
+    socket.on("disconnect", function() {
+        console.log("disconnect");
+        removeUser(socket.id);
+    })
+    
+})
+
+
 // Logs when its not a test
 if (process.env.NODE_ENV !== "test") {
     //Use morang to log
@@ -54,24 +107,10 @@ app.use((req, res, next) => {
     next(err);
 });
 
-// app.use((req, res, next) => {
-//     if (res.headersSent) {
-//         return next(err);
-//     }
-
-//     res.status(err.status || 500).json({
-//         errors: [
-//             {
-//                 "status": err.status,
-//                 "title": err.message,
-//                 "detail": err.message
-//             }
-//         ]
-//     });
-// });
-
 const server = app.listen(port, () => {
     console.log(`Listening to ${port}`);
 });
+
+ioServer.listen(1338);
 
 module.exports = server;
